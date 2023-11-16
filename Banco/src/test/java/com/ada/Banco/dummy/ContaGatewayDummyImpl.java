@@ -18,4 +18,15 @@ public class ContaGatewayDummyImpl implements ContaGateway {
     public Conta salvar(Conta conta) {
         return new Conta (123456L,00020L,3L, BigDecimal.ZERO,"Ligia", "123");
     }
+
+    @Override
+    public Conta realizarDeposito(Conta conta, BigDecimal quantia) {
+
+            BigDecimal novoSaldo=conta.getSaldo().add(quantia);
+
+
+
+            return new Conta(12345L,0002L,3L, novoSaldo,"Bruno", "123456789");
+
+    }
 }

@@ -33,10 +33,24 @@ public class CriarNovaContaTest {
 
         //When
         criarNovaConta.execute(conta);
-        //
+        //Then
         Assertions.assertAll(
                 ()-> Assertions.assertEquals("123", conta.getCpf()),
                 ()-> Assertions.assertEquals("Ligia",conta.getTitular())
 );
+    }
+    @Test
+    public void deveRealizarDeposito() throws Exception {
+        //Given
+        ContaGateway contaGateway = new ContaGatewayDummyImpl();  //Responsavel por  criar uma conta falsa.
+        CriarNovaConta criarNovaConta = new CriarNovaConta(contaGateway);
+        Conta conta = new Conta(123456L,00020L,3L, BigDecimal.ZERO,"Ligia", "123");
+        criarNovaConta.execute(conta);
+        //When
+        //contaGateway.realizarDeposito(conta,BigDecimal.TEN).getSaldo();
+
+        //Then
+        Assertions.assertEquals(BigDecimal.TEN,contaGateway.realizarDeposito(conta,BigDecimal.TEN).getSaldo());
+
     }
 }
